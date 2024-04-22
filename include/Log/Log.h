@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "Core/Core.h"
+#define SPDLOG_FMT_EXTERNAL
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 

@@ -70,7 +70,7 @@ bool Renderer::Initialize(std::string title, float screenWidth,
 
   // On some platforms, GLEW will emit a benign error code,
   // so clear it
-  glGetError();
+  //glGetError();
 
   // Make sure we can create/compile shaders
   if (!LoadShaders()) {
@@ -436,7 +436,7 @@ void Renderer::DrawFromGBuffer() {
 bool Renderer::LoadShaders() {
   // Create sprite shader
   mSpriteShader = new Shader();
-  if (!mSpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag")) {
+  if (!mSpriteShader->Load("/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/Sprite.vert", "/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/Sprite.frag")) {
     return false;
   }
 
@@ -448,7 +448,7 @@ bool Renderer::LoadShaders() {
 
   // Create basic mesh shader
   mMeshShader = new Shader();
-  if (!mMeshShader->Load("Shaders/Phong.vert", "Shaders/GBufferWrite.frag")) {
+  if (!mMeshShader->Load("/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/Phong.vert", "/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/GBufferWrite.frag")) {
     return false;
   }
 
@@ -461,8 +461,8 @@ bool Renderer::LoadShaders() {
 
   // Create skinned shader
   mSkinnedShader = new Shader();
-  if (!mSkinnedShader->Load("Shaders/Skinned.vert",
-                            "Shaders/GBufferWrite.frag")) {
+  if (!mSkinnedShader->Load("/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/Skinned.vert",
+                            "/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/GBufferWrite.frag")) {
     return false;
   }
 
@@ -471,8 +471,8 @@ bool Renderer::LoadShaders() {
 
   // Create shader for drawing from GBuffer (global lighting)
   mGGlobalShader = new Shader();
-  if (!mGGlobalShader->Load("Shaders/GBufferGlobal.vert",
-                            "Shaders/GBufferGlobal.frag")) {
+  if (!mGGlobalShader->Load("/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/GBufferGlobal.vert",
+                            "/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/GBufferGlobal.frag")) {
     return false;
   }
   // For the GBuffer, we need to associate each sampler with an index
@@ -489,8 +489,8 @@ bool Renderer::LoadShaders() {
 
   // Create a shader for point lights from GBuffer
   mGPointLightShader = new Shader();
-  if (!mGPointLightShader->Load("Shaders/BasicMesh.vert",
-                                "Shaders/GBufferPointLight.frag")) {
+  if (!mGPointLightShader->Load("/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/BasicMesh.vert",
+                                "/home/nesmy/KnucklesEditor/Targets/Debug/bin/Shaders/GBufferPointLight.frag")) {
     return false;
   }
   // Set sampler indices

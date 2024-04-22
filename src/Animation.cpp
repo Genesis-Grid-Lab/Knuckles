@@ -9,7 +9,7 @@ bool Animation::Load(const std::string &fileName) {
   mFileName = fileName;
   rapidjson::Document doc;
   if (!LevelLoader::LoadJSON(fileName, doc)) {
-    KE_CORE_ERROR("Failed to load animation %s", fileName.c_str());
+    KE_CORE_ERROR("Failed to load animation {0}", fileName.c_str());
     return false;
   }
 
@@ -17,13 +17,13 @@ bool Animation::Load(const std::string &fileName) {
 
   // Check the metadata
   if (ver != 1) {
-    KE_CORE_ERROR("Animation %s unknown format", fileName.c_str());
+    KE_CORE_ERROR("Animation {0} unknown format", fileName.c_str());
     return false;
   }
 
   const rapidjson::Value &sequence = doc["sequence"];
   if (!sequence.IsObject()) {
-    KE_CORE_ERROR("Animation %s doesn't have a sequence.", fileName.c_str());
+    KE_CORE_ERROR("Animation {0} doesn't have a sequence.", fileName.c_str());
     return false;
   }
 
@@ -32,7 +32,7 @@ bool Animation::Load(const std::string &fileName) {
   const rapidjson::Value &bonecount = sequence["bonecount"];
 
   if (!frames.IsUint() || !length.IsDouble() || !bonecount.IsUint()) {
-    KE_CORE_ERROR("Sequence %s has invalid frames, length, or bone count.",
+    KE_CORE_ERROR("Sequence {0} has invalid frames, length, or bone count.",
             fileName.c_str());
     return false;
   }
@@ -47,13 +47,13 @@ bool Animation::Load(const std::string &fileName) {
   const rapidjson::Value &tracks = sequence["tracks"];
 
   if (!tracks.IsArray()) {
-    KE_CORE_ERROR("Sequence %s missing a tracks array.", fileName.c_str());
+    KE_CORE_ERROR("Sequence {0} missing a tracks array.", fileName.c_str());
     return false;
   }
 
   for (rapidjson::SizeType i = 0; i < tracks.Size(); i++) {
     if (!tracks[i].IsObject()) {
-      KE_CORE_ERROR("Animation %s: Track element %d is invalid.", fileName.c_str(),
+      KE_CORE_ERROR("Animation {0}: Track element {1} is invalid.", fileName.c_str(),
               i);
       return false;
     }
